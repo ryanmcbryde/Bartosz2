@@ -155,8 +155,8 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 			throws TeamRepositoryException {
 		// TODO Auto-generated method stub
 		System.out.println("\n##########\nIN THE RUN MODULE OF AbstractService.java");
-		//SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+		//SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
 		Date date = new Date(System.currentTimeMillis());
 		System.out.println(formatter.format(date));
 		
@@ -501,8 +501,10 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 			IRSnexusUrl5 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?tag=" + NEXUS_TAG;  // This one looks for a repo with the tag from the Release ID field
 			nexusUrl2 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search/assets?group=" + NEXUS_GID + "&name=" + NEXUS_ARTIFACT_NAME + "&version=" + NEXUS_VER + "&maven.extension=" + NEXUS_EXTENSION + "&maven.classifier=" + NEXUS_CLASSIFIER;
 			IRSnexusUrl2 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?group=" + NEXUS_GID + "&name=" + NEXUS_ARTIFACT_NAME + "&version=" + NEXUS_VER + "&maven.extension=" + NEXUS_EXTENSION + "&maven.classifier=" + NEXUS_CLASSIFIER;
-			nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search?repository=IRS_ReleaseCandidate&tag=" + NEXUS_TAG;
-			IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository=release-candidates&tag=" + NEXUS_TAG;
+			nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search?repository="+ NON_IRS_NEXUS_RELEASE_CANDIDATE_REPO + "&tag=" + NEXUS_TAG;
+			//nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search?repository=IRS_ReleaseCandidate&tag=" + NEXUS_TAG;
+			IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository="+ IRS_NEXUS_RELEASE_CANDIDATE_REPO + "&tag=" + NEXUS_TAG;
+			//IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository=release-candidates&tag=" + NEXUS_TAG;
 						
 			if(originalState!=null) 
 			{ 
@@ -771,7 +773,7 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 		
 		//con.disconnect();
 		//org.apache.http.client.utils.HttpClientUtils.closeQuietly(con);
-		System.out.println("\n LINE NUMBER 746");
+		System.out.println("\n LINE NUMBER 775");
 		return true;
 	}
 	/**
@@ -863,7 +865,7 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	System.out.println("\n LINE NUMBER 865");
+	System.out.println("\n LINE NUMBER 867");
 	return true;
 	}
 	/**
@@ -901,10 +903,12 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 			if (IRS) 
 			{
 				System.out.println("\nADV:In ValidatePromotion with CERTIFIED: IRS");				
-				IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository=release-candidates&tag=" + NEXUS_TAG;
+				//IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository=release-candidates&tag=" + NEXUS_TAG;
+				IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository="+ IRS_NEXUS_RELEASE_CANDIDATE_REPO + "&tag=" + NEXUS_TAG;
 			} else {
 				System.out.println("\nADV:In ValidatePromotion with CERTIFIED: NON-IRS");
-				nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search?repository=IRS_ReleaseCandidate&tag=" + NEXUS_TAG;
+				//nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search?repository=IRS_ReleaseCandidate&tag=" + NEXUS_TAG;
+				nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository="+ NON_IRS_NEXUS_CERTIFIED_REPO + "&tag=" + NEXUS_TAG;
 			}	
 		} else if (State.equals("com.ibm.team.workitem.buildTrackingWorkflow.state.s14")) {
 			System.out.println("ADV:TARGET = DEPLOYED, SETTING TARGET REPO TO IRS_PRODUCTION");
@@ -912,10 +916,12 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 			if (IRS) 
 			{
 				System.out.println("\nADV:In ValidatePromotion with PRODUCTION: IRS");				
-				IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository=certified&tag=" + NEXUS_TAG;
+				//IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository=certified&tag=" + NEXUS_TAG;
+				IRSnexusUrl7 = "http://" + IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository="+ IRS_NEXUS_CERTIFIED_REPO + "&tag=" + NEXUS_TAG;
 			} else {
 				System.out.println("\nADV:In ValidatePromotion with PRODUCTION: NON-IRS");
-				nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search?repository=IRS_Certified&tag=" + NEXUS_TAG;
+				//nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/service/rest/v1/search?repository=IRS_Certified&tag=" + NEXUS_TAG;
+				nexusUrl7 = "http://" + NON_IRS_NEXUS_INSTANCE_URL + "/nexus/service/rest/v1/search?repository="+ NON_IRS_NEXUS_CERTIFIED_REPO + "&tag=" + NEXUS_TAG;
 			}
 		} else {
 			System.out.println("\nADV:NO TARGET SPECIFIED");	
@@ -1006,7 +1012,7 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("\n LINE NUMBER 1008");
+		System.out.println("\n LINE NUMBER 1014");
 		return true;
 	}	
 	
