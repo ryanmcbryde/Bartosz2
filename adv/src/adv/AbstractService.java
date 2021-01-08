@@ -176,7 +176,7 @@ public class AbstractService extends com.ibm.team.repository.service.AbstractSer
 		IAuditable oldState = save.getOldState();
 		if (obj instanceof ISaveParameter) {
 			saveParameter = (ISaveParameter) obj;
-			System.out.println("ADV:CHECKING THE STATUS of CREATE_TRACED_WORKITEMS_PARTICIPANTS_ACTION_SAVENEW TO DETEMINE IF THE PARTICIPANT IS SUPPOSED TO FIRE");
+			System.out.println("ADV:CHECKING THE STATUS of CREATE_TRACED_WORKITEMS_PARTICIPANTS_ACTION_SAVE TO DETEMINE IF THE PARTICIPANT IS SUPPOSED TO FIRE");
 			/*
 			if (saveParameter.getAdditionalSaveParameters().contains(BuildOnStateChangeParticipant.CREATE_TRACED_WORKITEMS_PARTICIPANTS_ACTION_SAVENEW)) 
 			{ 
